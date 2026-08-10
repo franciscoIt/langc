@@ -9,16 +9,26 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 def main():
-    # Automatically uses the (GEMINI_API_KEY) environment variable
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-3.6-flash",
-        temperature=0.2,
-    )
+    test_con()
 
-    response = llm.invoke("Explain quantum computing in one short paragraph.")
+
+def test_con():
+    # Automatically uses the (GEMINI_API_KEY) environment variable
+    llm_gemini = ChatGoogleGenerativeAI(
+        model="gemini-3.6-flash",
+        temperature=0.1,
+    )
+    
+    response = llm_gemini.invoke(""Say'setup complete!' in one word"")
 
     print(response.content)
 
+    llm_anthropic = ChatAnthropic(
+        model="claude-sonnet-4-5-20250929",
+        temperature=0,
+    )
+    response_anthropic = llm_anthropic.invoke("Say'setup complete!' in one word")
+    print(f"Response anthropic: {response_anthropic}")
 
 if __name__ == "__main__":
     main()
