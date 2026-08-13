@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 load_dotenv()
 from importlib.metadata import version
 
-from langchain_core import __version__ as core_version
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -10,6 +9,9 @@ from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+from langchain.chat_models import init_chat_model
+
+from langchain_core.messages import HumanMessage,SystemMessage
 
 
 
@@ -49,8 +51,15 @@ def demo_basic_chain():
 
     # execute with input 
     result = chain.invoke({"question":"What is langChain?"})
+            
     print(f"response: {result}") 
     return chain 
+
+    
+def init_chat():
+    """ new universal way to init the model"""
+    model = init_chat_model("claude-sonnet-4-5-20250929", temperature=0.7, max_tokens=2000)
+    return model
     
 
 if __name__ == "__main__":
